@@ -2,16 +2,9 @@
 
 Getting Phylip and SLURM to work together on SCW systems.
 
-## Setting the `PATH` variable
-
-- In your `foofile.txt` file you type the full path to `dnadist`.
-
-- There is nothing wrong with this but if you wanted to use other executables from Phylip's `exe` folder, you would have to constantly write out the full path, so I added the location of Phylip's `exe` folder to my `PATH` environment variable.
-
-- Doing this, enables me to just write `dnadist` instead of `/home/user/phylip/phylip-3.697/exe/dnadist`.
-
-
 ## My SLURM Script
+
+- I've adapted this script for you, but is the same as the one I used to successfully calculate the test file: `r5b1.phy`
 
 ```
 #!/bin/bash --login
@@ -27,7 +20,7 @@ Getting Phylip and SLURM to work together on SCW systems.
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=40
 #SBATCH --threads-per-core=1
-#SBATCH --mail-user=s.710994@swansea.ac.uk
+#SBATCH --mail-user=710994@swansea.ac.uk
 #SBATCH --mail-type=END,FAIL
 
 export PATH=/home/s.710994/phylip/phylip-3.697/exe:${PATH}
@@ -36,11 +29,16 @@ dnadist < input > output &
 wait
 ```
 
-##
+### Discussion of SLURM Script
 
-- Firstly, I removed the need of the `foofile.txt` and put the contents of this into my SLURM script.
-- I also
+#### Removal of `foofile.txt`
 
-- Originally you sent me three files, which is fine, but I personally removed the `foofile.txt` and put the contents of those into my SLURM submission script, just to make it simpler.
+- You will notice that I've included the contents of `foofile.txt` inside the script itself, so we no longer need that file.
 
-- You were also
+#### Setting the `PATH` variable
+
+- The `export PATH=/home/s.710994/phylip/phylip-3.697/exe:${PATH}` line in the above script means you no longer have to type out the full path to the location of `dnadist` and can, instead, just type `dnadist` or any other of Phylip's `exe` files without typing `/home/s.710994/phylip...` and so on.
+
+- There's nothing wrong with the way you did it, I'm just lazy.
+
+#### The `input` File
