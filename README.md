@@ -4,7 +4,7 @@ Getting Phylip and SLURM to work together on SCW systems.
 
 ## My SLURM Script
 
-- I've adapted this script for you, but is the same as the one I used to successfully calculate the test file: `r5b1.phy`
+- I've adapted this script for you, but it's the same as the one I used to successfully calculate the test file: `r5b1.phy`
 
 ```
 #!/bin/bash --login
@@ -42,3 +42,19 @@ wait
 - There's nothing wrong with the way you did it, I'm just lazy.
 
 #### The `input` File
+
+- I've included the `input` file in the same directory as my SLURM script, so I don't need to type the full path to it, which you did in your `foofile.txt` file.  
+
+- Again, there's nothing wrong with the way you did it, or editing the script above to alter `dnadist < input > ouput &` to something like: `dnadist < /scratch/example/phylip/input > /scratch/example/phylip/output` or something like that.
+
+- For clarity, here's the contents of `input` that I used to test Phylip and SLURM together:
+
+```
+r5b1.phy
+F
+r5b1.dist
+I
+Y
+```
+
+- Again, I didn't need to write the full path to the files `r5b1.phy` and `r5b1.dist` because they were being read from, and written to, the same directory as my SLURM script.  You might want to do this as you're reading/writing files from/to `scratch` - this is fine to do.
