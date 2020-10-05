@@ -57,4 +57,10 @@ I
 Y
 ```
 
-- Again, I didn't need to write the full path to the files `r5b1.phy` and `r5b1.dist` because they were being read from, and written to, the same directory as my SLURM script.  You might want to do this as you're reading/writing files from/to `scratch` - this is fine to do.
+- Again, I didn't need to write the full path to the files `r5b1.phy` and `r5b1.dist` because they were being read from, and written to, the same directory as my SLURM script.  You might want to do this (type full paths) as you're reading/writing files from/to `scratch` - this is fine to do.
+
+#### The `wait` Command
+
+- This is used to ensure the background job `dnadist < input > ouput` has time to read the contents of `input` before it proceeds/cancels.
+
+- Without this, the job always failed.  With it, my script now produces the output file `r5b1.dist`.
